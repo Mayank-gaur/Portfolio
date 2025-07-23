@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayank Gaur | ML Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(-45deg, #020024, #090979, #4a044e, #8b5cf6);
+            background-size: 400% 400%;
+            animation: gradient-animation 20s ease infinite;
+            color: #E5E7EB; /* Gray 200 */
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            overflow-x: hidden;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); /* Added for text visibility */
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .font-heading {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .glass-effect {
+            background: rgba(10, 25, 47, 0.5); /* Dark Blue with transparency */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.1); /* Violet with transparency */
+        }
+        .accent-text {
+            color: #8B5CF6; /* Violet */
+        }
+        .section-heading {
+            display: flex;
+            align-items: center;
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: #F9FAFB; /* Gray 50 */
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            position: relative;
+            top: 2px;
+            width: 200px;
+            height: 1px;
+            margin-left: 20px;
+            background-color: #374151; /* Gray 700 */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0a0f1e;
+            border: 3px solid #8B5CF6;
+            box-shadow: 0 0 10px #8B5CF6;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            color: #D1D5DB; /* Gray 300 */
+            font-weight: 600;
+        }
+        .tab-btn.active {
+            color: #8B5CF6;
+            border-bottom-color: #8B5CF6;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: grid;
+        }
+        /* Project Card Flip Animation */
+        .project-card {
+            perspective: 1000px;
+            min-height: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.1);
+        }
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+        .project-card-front, .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .project-card-front h3 {
+             font-family: 'Orbitron', sans-serif;
+             font-weight: 700;
+        }
+        .project-card-back {
+            transform: rotateY(180deg);
+            justify-content: space-between;
+            align-items: flex-start;
+            text-align: left;
+        }
+        /* Breathing/Pulsing animations */
+        @keyframes breathing-text {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+            50% { transform: scale(1.03); text-shadow: 0 0 16px rgba(139, 92, 246, 0.9); }
+        }
+        .breathing-text {
+            animation: breathing-text 4s ease-in-out infinite;
+        }
+        @keyframes glowing-button {
+            0%, 100% { box-shadow: 0 0 5px #8B5CF6, 0 0 5px #8B5CF6 inset; }
+            50% { box-shadow: 0 0 15px #8B5CF6, 0 0 10px #8B5CF6 inset; }
+        }
+        .glowing-button {
+             animation: glowing-button 3s ease-in-out infinite;
+        }
+        /* Nav link animation */
+        .nav-link {
+            transition: transform 0.2s ease-out, color 0.2s ease-out;
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            transform: translateY(-2px);
+            color: #8B5CF6;
+        }
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect transition-all duration-300 shadow-lg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold accent-text font-heading">MG</a>
+            <div class="hidden md:flex space-x-8 text-gray-200">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="https://drive.google.com/file/d/12t0SXgfNxbTKnT5oz6EVlHrgp-y-XEJr/view?usp=sharing" target="_blank" class="border border-violet-500 text-violet-400 px-4 py-2 rounded-md hover:bg-violet-500/10 transition-colors font-semibold">Resume</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center fade-in">
+            <p class="text-lg accent-text mb-4 font-semibold">Hi, my name is</p>
+            <h1 class="text-4xl md:text-7xl font-bold text-gray-50 font-heading">Mayank Gaur.</h1>
+            <h2 class="text-4xl md:text-6xl font-bold text-gray-300 mt-2 font-heading breathing-text">I build intelligent solutions.</h2>
+            <p class="mt-6 max-w-xl text-gray-300 text-lg">
+                I'm a Machine Learning Engineer specializing in Generative AI and Computer Vision. I'm passionate about architecting creative, high-impact technology that solves complex problems and pushes business boundaries.
+            </p>
+            <div class="mt-8">
+                <a href="#projects" class="bg-violet-500 text-white font-bold py-3 px-8 rounded-md hover:bg-violet-600 transition-colors glowing-button">View My Projects</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24">
+            <h2 class="section-heading font-heading fade-in">About Me</h2>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-10 fade-in">
+                <div class="md:col-span-2 text-gray-300 space-y-4 text-base">
+                    <p>
+                        Hello! I'm Mayank, an ML Engineer with a passion for turning complex challenges into elegant, intelligent solutions. My journey in tech began with a fascination for how data could tell stories and predict futures, which naturally led me to the world of machine learning.
+                    </p>
+                    <p>
+                        Over the past two years, I've had the privilege of working on cutting-edge projects at companies like <span class="accent-text font-semibold">Phot.ai</span> and <span class="accent-text font-semibold">Flixstock</span>. I've engineered everything from advanced AI systems that generate creative content to virtual try-on pipelines that redefine e-commerce experiences.
+                    </p>
+                    <p>
+                        What truly drives me is the blend of creativity and logic required to build something new. Whether it's architecting a multi-layered agentic workflow or fine-tuning a model to achieve photorealism, I thrive on the challenge of making technology not just functional, but impactful.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="w-64 h-64 rounded-lg overflow-hidden group relative">
+                        <img src="https://placehold.co/300x300/0a0f1e/8B5CF6?text=MG" alt="Mayank Gaur" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-violet-500/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24">
+            <h2 class="section-heading font-heading fade-in">Where I've Worked</h2>
+            <div class="mt-12 relative border-l-2 border-gray-700 pl-8 space-y-16 fade-in">
+                <!-- Phot.ai -->
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-gray-100 font-heading">ML Engineer @ <span class="accent-text">Phot.ai</span></h3>
+                    <p class="text-sm text-gray-400 mb-4 font-semibold">Sep 2024 - Present</p>
+                    <p class="text-gray-300">At Phot.ai, I focus on developing advanced generative AI solutions for e-commerce, including agentic workflows for content creation and deploying production-ready model APIs.</p>
+                </div>
+                <!-- Flixstock -->
+                <div class="timeline-item">
+                    <h3 class="text-xl font-bold text-gray-100 font-heading">ML Engineer @ <span class="accent-text">Flixstock India Pvt Ltd.</span></h3>
+                    <p class="text-sm text-gray-400 mb-4 font-semibold">Jul 2022 - Sep 2024</p>
+                    <p class="text-gray-300">My role involved pioneering virtual try-on technologies using SDXL and ControlNet, creating proprietary data pipelines, and developing novel image-warping solutions for fashion e-commerce.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24">
+            <h2 class="section-heading font-heading fade-in">Featured Projects</h2>
+            <div class="mt-8 fade-in">
+                <!-- Tabs -->
+                <div class="flex border-b border-gray-700">
+                    <button class="tab-btn active" data-tab="photai">Phot.ai</button>
+                    <button class="tab-btn" data-tab="flixstock">Flixstock</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="photai" class="tab-content active mt-8 grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Advanced Banner Generation</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Pioneered a multi-modal system that accepts user queries, images, and logos to generate high-quality banners, featuring an agentic feedback loop with an AI critic for iterative quality improvements.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangGraph</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Agentic AI</span></div></div></div></div>
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Agentic AI for E-commerce</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Designed and implemented an end-to-end pipeline for generating sellable, aesthetically pleasing infographics for platforms like Amazon and Meesho, using a versatile agentic workflow with LangChain.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangChain</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">E-commerce</span></div></div></div></div>
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Object Replacer & Deployment</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Led R&D for an object inpainting feature. Orchestrated the deployment of the selected model into production, building robust and scalable model APIs using Ray Serve, Kafka, and Docker.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ML Ops</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Ray Serve</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Kafka</span></div></div></div></div>
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Background Replacer & UX</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Spearheaded development of a novel background replacement model, achieving a 60% reduction in processing time and increasing user downloads from 8% to 20%.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Hypernetworks</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span></div></div></div></div>
+                </div>
+
+                <div id="flixstock" class="tab-content mt-8 grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Virtual Try-On Pipeline</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Developed an SDXL-based pipeline to generate photo-realistic, full-body human images. Trained ControlNet on a dataset of 600,000+ images and used LoRA/Dreambooth to create 80+ high-quality virtual identities.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ControlNet</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LoRA</span></div></div></div></div>
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Meta Models Data Pipeline</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Built a proprietary pipeline to generate high-quality, copyright-free virtual identity datasets. Used FaceFusion for face swapping and CCSR, a diffusion-based upscaler, to create over 25 metamodel datasets.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Data Pipeline</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">FaceFusion</span></div></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 text-center">
+            <h2 class="text-2xl accent-text font-heading fade-in">What's Next?</h2>
+            <h3 class="text-4xl md:text-5xl font-bold text-gray-100 mt-4 font-heading fade-in">Get In Touch</h3>
+            <p class="mt-6 max-w-xl mx-auto text-gray-300 fade-in">
+                I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Feel free to reach out directly or connect with me on social media.
+            </p>
+            <div class="mt-8 fade-in flex justify-center items-center gap-4">
+                <p id="email-text" class="text-lg text-gray-200">mayank.gaur2000@gmail.com</p>
+                <button id="copy-email-btn" class="border border-violet-500 text-violet-400 font-bold py-2 px-4 rounded-md hover:bg-violet-500/10 transition-colors">
+                    Copy Email
+                </button>
+            </div>
+            <div class="mt-12 flex justify-center space-x-6 fade-in">
+                <a href="https://github.com/Mayank-gaur" target="_blank" class="text-gray-400 hover:text-violet-400 social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/mayank-gaur-44814b168/" target="_blank" class="text-gray-400 hover:text-violet-400 social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Particle background animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particlesArray;
+        let sparklesArray;
+        let mouse = {
+            x: null,
+            y: null,
+            radius: (canvas.height/100) * (canvas.width/100)
+        }
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+            // Create a burst of sparkles on move
+            for (let i = 0; i < 5; i++) {
+                sparklesArray.push(new Sparkle(mouse.x, mouse.y));
+            }
+        });
+
+        // Base Particle for the background network
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.baseSize = this.size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.shadowColor = 'rgba(139, 92, 246, 1)';
+                ctx.shadowBlur = 10;
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                if (this.y > canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+
+                // Mouse interaction - grow particles near cursor
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                let maxDistance = mouse.radius;
+                
+                if (distance < maxDistance) {
+                    let force = (maxDistance - distance) / maxDistance;
+                    this.size = this.baseSize + (5 * force);
+                } else if (this.size > this.baseSize) {
+                    this.size -= 0.1;
+                }
+                if (this.size < this.baseSize) {
+                    this.size = this.baseSize;
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+        
+        // Sparkle class for cursor trail
+        class Sparkle {
+            constructor(x, y) {
+                this.x = x + (Math.random() - 0.5) * 20;
+                this.y = y + (Math.random() - 0.5) * 20;
+                this.size = Math.random() * 2.5 + 1;
+                this.speedX = (Math.random() - 0.5) * 2.5;
+                this.speedY = (Math.random() - 0.5) * 2.5;
+                this.life = 100; // Lifespan of the sparkle
+                this.opacity = 1;
+                this.color = `hsl(${Math.random() * 60 + 240}, 100%, 75%)`; // Shades of blue to purple/magenta
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 1.5;
+                if (this.life < 0) this.life = 0;
+                this.opacity = this.life / 100;
+            }
+            draw() {
+                ctx.fillStyle = this.color.replace(')', `, ${this.opacity})`).replace('hsl', 'hsla');
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset shadow blur
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            sparklesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2.5) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                let color = 'rgba(139, 92, 246, 0.7)'; // Violet with transparency
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function connectParticles() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/8) * (canvas.height/8)) {
+                        opacityValue = 1 - (distance/20000);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacityValue * 0.8})`;
+                        ctx.shadowColor = 'rgba(139, 92, 246, 1)';
+                        ctx.shadowBlur = 5;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
+        }
+        
+        function handleSparkles() {
+            for (let i = sparklesArray.length - 1; i >= 0; i--) {
+                sparklesArray[i].update();
+                sparklesArray[i].draw();
+                if (sparklesArray[i].life <= 0) {
+                    sparklesArray.splice(i, 1);
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0,0,innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connectParticles();
+            handleSparkles();
+        }
+        
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            mouse.radius = (canvas.height/100) * (canvas.width/100);
+            init();
+        });
+        
+        window.addEventListener('mouseout', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        })
+
+        init();
+        animate();
+
+        // Fade-in animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-tab');
+
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                tabContents.forEach(content => {
+                    if (content.id === target) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Copy email functionality
+        const copyBtn = document.getElementById('copy-email-btn');
+        const emailText = document.getElementById('email-text').textContent;
+
+        copyBtn.addEventListener('click', () => {
+            const textarea = document.createElement('textarea');
+            textarea.value = emailText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = 'Copy Email';
+            }, 2000);
+        });
+
+    </script>
+</body>
+</html>
