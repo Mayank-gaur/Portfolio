@@ -17,7 +17,7 @@
         body {
             background: linear-gradient(-45deg, #020024, #090979, #4a044e, #8b5cf6);
             background-size: 400% 400%;
-            animation: gradient-animation 20s ease infinite;
+            animation: gradient-animation 15s ease infinite; /* Faster animation */
             color: #E5E7EB; /* Gray 200 */
             font-family: 'Rajdhani', sans-serif;
             font-weight: 500;
@@ -318,7 +318,7 @@
             mouse.x = event.x;
             mouse.y = event.y;
             // Create a burst of sparkles on move
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 2; i++) { // OPTIMIZATION: Reduced sparkle count
                 sparklesArray.push(new Sparkle(mouse.x, mouse.y));
             }
         });
@@ -383,7 +383,7 @@
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                this.life -= 1.5;
+                this.life -= 2.5; // OPTIMIZATION: Faster fade
                 if (this.life < 0) this.life = 0;
                 this.opacity = this.life / 100;
             }
@@ -401,7 +401,8 @@
         function init() {
             particlesArray = [];
             sparklesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            // OPTIMIZATION: Reduced particle count
+            let numberOfParticles = (canvas.height * canvas.width) / 15000;
             for (let i = 0; i < numberOfParticles; i++) {
                 let size = (Math.random() * 2.5) + 1;
                 let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
@@ -419,7 +420,8 @@
                 for (let b = a; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                         + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width/8) * (canvas.height/8)) {
+                    // OPTIMIZATION: Reduced connection distance
+                    if (distance < (canvas.width/10) * (canvas.height/10)) {
                         opacityValue = 1 - (distance/20000);
                         ctx.strokeStyle = `rgba(139, 92, 246, ${opacityValue * 0.8})`;
                         ctx.shadowColor = 'rgba(139, 92, 246, 1)';
