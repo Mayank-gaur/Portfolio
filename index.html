@@ -178,7 +178,6 @@
 
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 glass-effect transition-all duration-300 shadow-lg">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#hero" class="text-2xl font-bold accent-text font-heading">MG</a>
@@ -194,7 +193,6 @@
 
     <main class="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
 
-        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex flex-col justify-center fade-in">
             <p class="text-lg accent-text mb-4 font-semibold">Hi, my name is</p>
             <h1 class="text-4xl md:text-7xl font-bold text-gray-50 font-heading">Mayank Gaur.</h1>
@@ -207,7 +205,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-24">
             <h2 class="section-heading font-heading fade-in">About Me</h2>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-10 fade-in">
@@ -231,17 +228,14 @@
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section id="experience" class="py-24">
             <h2 class="section-heading font-heading fade-in">Where I've Worked</h2>
             <div class="mt-12 relative border-l-2 border-gray-700 pl-8 space-y-16 fade-in">
-                <!-- Phot.ai -->
                 <div class="timeline-item">
                     <h3 class="text-xl font-bold text-gray-100 font-heading">ML Engineer @ <span class="accent-text">Phot.ai</span></h3>
                     <p class="text-sm text-gray-400 mb-4 font-semibold">Sep 2024 - Present</p>
                     <p class="text-gray-300">At Phot.ai, I focus on developing advanced generative AI solutions for e-commerce, including agentic workflows for content creation and deploying production-ready model APIs.</p>
                 </div>
-                <!-- Flixstock -->
                 <div class="timeline-item">
                     <h3 class="text-xl font-bold text-gray-100 font-heading">ML Engineer @ <span class="accent-text">Flixstock India Pvt Ltd.</span></h3>
                     <p class="text-sm text-gray-400 mb-4 font-semibold">Jul 2022 - Sep 2024</p>
@@ -250,32 +244,28 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section id="projects" class="py-24">
             <h2 class="section-heading font-heading fade-in">Featured Projects</h2>
             <div class="mt-8 fade-in">
-                <!-- Tabs -->
                 <div class="flex border-b border-gray-700">
                     <button class="tab-btn active" data-tab="photai">Phot.ai</button>
                     <button class="tab-btn" data-tab="flixstock">Flixstock</button>
                 </div>
 
-                <!-- Tab Content -->
                 <div id="photai" class="tab-content active mt-8 grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Advanced Banner Generation</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Pioneered a multi-modal system that accepts user queries, images, and logos to generate high-quality banners, featuring an agentic feedback loop with an AI critic for iterative quality improvements.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangGraph</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Agentic AI</span></div></div></div></div>
-                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Agentic AI for E-commerce</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Designed and implemented an end-to-end pipeline for generating sellable, aesthetically pleasing infographics for platforms like Amazon and Meesho, using a versatile agentic workflow with LangChain.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangChain</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">E-commerce</span></div></div></div></div>
-                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Object Replacer & Deployment</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Led R&D for an object inpainting feature. Orchestrated the deployment of the selected model into production, building robust and scalable model APIs using Ray Serve, Kafka, and Docker.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ML Ops</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Ray Serve</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Kafka</span></div></div></div></div>
-                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Background Replacer & UX</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Spearheaded development of a novel background replacement model, achieving a 60% reduction in processing time and increasing user downloads from 8% to 20%.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Hypernetworks</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span></div></div></div></div>
+                    <a href="https://studio.phot.ai/banner-gen/ad-creatives" target="_blank" class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Advanced Banner Generation</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Pioneered a multi-modal system that accepts user queries, images, and logos to generate high-quality banners, featuring an agentic feedback loop with an AI critic for iterative quality improvements.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangGraph</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Agentic AI</span></div></div></div></a>
+                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Agentic AI for E-commerce (Under Development)</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Designed and implemented an end-to-end pipeline for generating sellable, aesthetically pleasing infographics for platforms like Amazon and Meesho, using a versatile agentic workflow with LangChain.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LangChain</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">E-commerce</span></div></div></div></div>
+                    <a href="https://www.phot.ai/object-replacer" target="_blank" class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Object Replacer & Deployment</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Led R&D for an object inpainting feature. Orchestrated the deployment of the selected model into production, building robust and scalable model APIs using Ray Serve, Kafka, and Docker.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ML Ops</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Ray Serve</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Kafka</span></div></div></div></a>
+                    <a href="https://www.phot.ai/background-replacer" target="_blank" class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Background Replacer & UX</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Spearheaded development of a novel background replacement model, achieving a 60% reduction in processing time and increasing user downloads from 8% to 20%.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Hypernetworks</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span></div></div></div></a>
                 </div>
 
                 <div id="flixstock" class="tab-content mt-8 grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Virtual Try-On Pipeline</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Developed an SDXL-based pipeline to generate photo-realistic, full-body human images. Trained ControlNet on a dataset of 600,000+ images and used LoRA/Dreambooth to create 80+ high-quality virtual identities.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ControlNet</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LoRA</span></div></div></div></div>
+                    <a href="https://www.metamodels.ai/" target="_blank" class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Virtual Try-On Pipeline</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Developed an SDXL-based pipeline to generate photo-realistic, full-body human images. Trained ControlNet on a dataset of 600,000+ images and used LoRA/Dreambooth to create 80+ high-quality virtual identities.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">SDXL</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">ControlNet</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">LoRA</span></div></div></div></a>
                     <div class="project-card glass-effect rounded-lg"><div class="project-card-inner"><div class="project-card-front"><h3 class="text-xl text-gray-100">Meta Models Data Pipeline</h3></div><div class="project-card-back"><p class="text-gray-300 flex-grow">Built a proprietary pipeline to generate high-quality, copyright-free virtual identity datasets. Used FaceFusion for face swapping and CCSR, a diffusion-based upscaler, to create over 25 metamodel datasets.</p><div class="mt-4 flex flex-wrap gap-2"><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">Data Pipeline</span><span class="bg-violet-900/50 text-violet-400 text-xs font-semibold px-2 py-1 rounded-full">FaceFusion</span></div></div></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-24 text-center">
             <h2 class="text-2xl accent-text font-heading fade-in">What's Next?</h2>
             <h3 class="text-4xl md:text-5xl font-bold text-gray-100 mt-4 font-heading fade-in">Get In Touch</h3>
@@ -527,4 +517,3 @@
     </script>
 </body>
 </html>
-
